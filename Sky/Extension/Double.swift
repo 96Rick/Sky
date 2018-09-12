@@ -11,5 +11,6 @@ import Foundation
  extension Double {
     func toCelcius() -> Double {
         return (self - 32) / 1.8
+     
     }
  }
