@@ -22,7 +22,7 @@ class RootViewController: UIViewController {
             guard let destination = segue.destination as? CurrentWeatherViewController else {
                 fatalError("Invalid destination view controller.")
             }
-            
+    
             destination.delegate = self
             currentWeatherViewController = destination
         
@@ -37,7 +37,7 @@ class RootViewController: UIViewController {
             //Fetch the city name
             print("begain fetch city")
             fetchCity()
-            print("fetched city")
+            
             //Fetch the weather data
             fetchWeather()
             print("fetched weather")
