@@ -24,6 +24,7 @@ class RootViewController: UIViewController {
             }
     
             destination.delegate = self
+            destination.viewModel = CurrentWeatherViewModel()
             currentWeatherViewController = destination
         
         default:
@@ -55,28 +56,13 @@ class RootViewController: UIViewController {
                 dump(error)
             } else if let response = response {
                 // Notify CurrentWeatherController
-                self.currentWeatherViewController.now = response
+                self.currentWeatherViewController.viewModel?.weather = response
             }
         })
     }
     
     private func fetchCity() {
         guard let currentLocation = currentLocation else { return }
-        CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: {
-            placemarks, error in
-            if let error = error {
-                print(error)
-            } else if let city = placemarks?.first?.locality {
-                let l = Location(
-                    name: city,
-                    latitude: currentLocation.coordinate.latitude,
-                    longitude: currentLocation.coordinate.longitude)
-                
-                self.currentWeatherViewController.location = l
-            }
-        })
-        
-        
         CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: {
             placemarks, error in
             
@@ -89,9 +75,7 @@ class RootViewController: UIViewController {
                     name: city,
                     latitude: currentLocation.coordinate.latitude,
                     longitude: currentLocation.coordinate.longitude)
-                
-                self.currentWeatherViewController.location = l
-                
+                self.currentWeatherViewController.viewModel?.location = l
             }
         })
     }
