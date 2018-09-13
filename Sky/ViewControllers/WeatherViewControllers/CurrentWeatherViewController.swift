@@ -50,7 +50,7 @@ class CurrentWeatherViewController: WeatherViewController {
         if let now = now, let location = location {
             updateWeatherContainer(with: now, at: location)
         } else {
-            loadingFailedLabel.isHidden = false
+            loadingFailedLabel.isHidden = true
             loadingFailedLabel.text = "Fetch weather / Location Failed"
         }
     }
@@ -75,7 +75,5 @@ class CurrentWeatherViewController: WeatherViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
     }
 }

@@ -31,7 +31,6 @@ class RootViewController: UIViewController {
         }
     }
     
-    
     private var currentLocation: CLLocation? {
         didSet {
             //Fetch the city name
@@ -157,7 +156,6 @@ extension RootViewController: CLLocationManagerDelegate {
         dump(error)
     }
 }
-
 
 extension RootViewController: CurrentWeatherViewControllerDelegate {
     func locationButtonPressed(controller: WeatherViewController) {
