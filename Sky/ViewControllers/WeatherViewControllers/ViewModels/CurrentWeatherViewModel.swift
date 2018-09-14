@@ -61,7 +61,16 @@ struct CurrentWeatherViewModel {
     
     var date: String {
         let formatterDay = DateFormatter()
-        formatterDay.dateFormat = "M月d号"
+        let lan = UserDefaults.getCurrentLanguage()
+        switch lan {
+        case "EN":
+            formatterDay.dateFormat = "MMM d "
+        case "CN":
+            formatterDay.dateFormat = "M月d"
+        default:
+            formatterDay.dateFormat = "MMM d "
+        }
+        
         let frontDateText = formatterDay.string(from: weather.currently.time)
         
         let formatterWeek = DateFormatter()

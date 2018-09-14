@@ -45,20 +45,20 @@ class CurrentWeatherViewController: WeatherViewController {
             loadingFailedLabel.isHidden = true
             loadingFailedLabel.text = "Fetch weather / Location Failed"
         }
-        activityIndicatorView.stopAnimating()
-        activityIndicatorView.isHidden = true
+      
     }
     
     func updateWeatherContainer(with vm: CurrentWeatherViewModel) {
         weatherContainerView.isHidden = false
-    
+
         locationLabel.text = vm.city
         temperatureLabel.text = vm.temperature
         weatherIcon.image = vm.weatherIcon
         humidityLabel.text = vm.humidity
         summaryLabel.text = vm.summary
         dateLabel.text = vm.date
-        
+
+        activityIndicatorView.stopAnimating()
     }
     
     override func viewDidLoad() {
