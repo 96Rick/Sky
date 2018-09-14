@@ -17,20 +17,17 @@ extension UserDefaults {
 //            zh-Hans-CN或zh-Hans  简体中文
 //            zh-Hant-CN或zh-Hant  繁体中文
 //            ja-CN或ja  日本
-            print(currentLan)
-            
-            switch currentLan {
-            case "en-CN", "en":
+//            print(currentLan)
+            if currentLan.hasPrefix("en") {
                 currentLan = "EN"
-            case "zh-Hans-CN", "zh-Hans":
-                currentLan = "CN-Sim"
-            case "zh-Hant-CN", "zh-Hant":
-                currentLan = "CN-Com"
-            case "ja-CN", "ja":
+            } else if currentLan.hasPrefix("zh") {
+                currentLan = "CN"
+            } else if currentLan.hasPrefix("ja") {
                 currentLan = "JAP"
-            default:
+            } else {
                 currentLan = "EN"
             }
+            
             return currentLan
         }
         return "EN"

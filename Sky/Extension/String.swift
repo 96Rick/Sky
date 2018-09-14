@@ -15,7 +15,7 @@ extension String {
         
         let currentLanguage = UserDefaults.getCurrentLanguage()
         switch currentLanguage {
-        case "CN-Sim", "CN-Com":
+        case "CN":
             switch self {
             case "Mon", "Monday":
                 self = "星期一"

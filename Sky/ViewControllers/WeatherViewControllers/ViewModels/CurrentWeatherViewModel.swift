@@ -66,7 +66,7 @@ struct CurrentWeatherViewModel {
         case "EN":
             formatterDay.dateFormat = "MMM d "
         case "CN":
-            formatterDay.dateFormat = "M月d"
+            formatterDay.dateFormat = "M月d号 "
         default:
             formatterDay.dateFormat = "MMM d "
         }
