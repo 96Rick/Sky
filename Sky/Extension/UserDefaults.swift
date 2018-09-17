@@ -27,7 +27,6 @@ extension UserDefaults {
             } else {
                 currentLan = "EN"
             }
-            
             return currentLan
         }
         return "EN"

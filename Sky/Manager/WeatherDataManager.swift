@@ -51,13 +51,18 @@ final class WeatherDataManager {
         } else if let data = data, let response = response as? HTTPURLResponse  {
             if response.statusCode == 200 {
                 do {
-                    let weatherData =  try JSONDecoder().decode(WeatherData.self, from: data )
+                    let weatherData = try JSONDecoder().decode(WeatherData.self, from: data)
+//                    print(weatherData)
+//                    print("1")
                     completion(weatherData, nil)
                 }
                 catch {
-                    completion(nil, .invalidResponse )
+                    print(response)
+                    print("inv")
+                    completion(nil, .invalidResponse)
                 }
             } else {
+                print("1")
                 completion(nil, .failedRequest)
             }
         }

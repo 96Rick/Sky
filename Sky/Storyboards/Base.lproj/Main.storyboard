@@ -27,7 +27,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Okv-GR-ec1">
                                 <rect key="frame" x="0.0" y="286" width="375" height="381"/>
                                 <connections>
-                                    <segue destination="RK0-6x-Nh8" kind="embed" id="XvU-S3-EXS"/>
+                                    <segue destination="RK0-6x-Nh8" kind="embed" identifier="segueWeekWeather" id="XvU-S3-EXS"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -296,7 +296,7 @@
         <!--Week Weather View Controller-->
         <scene sceneID="nkq-wc-wAz">
             <objects>
-                <viewController id="RK0-6x-Nh8" customClass="WeekWeatherViewController" customModule="Sky" sceneMemberID="viewController">
+                <viewController id="RK0-6x-Nh8" customClass="WeekWeatherViewController" customModule="Sky" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cea-kq-fus">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="381"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,7 +320,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="381"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="110" id="Emd-Eb-6Vg" customClass="WeekWeatherTableViewCell" customModule="Sky" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="WeekWeatherCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="110" id="Emd-Eb-6Vg" customClass="WeekWeatherTableViewCell" customModule="Sky">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Emd-Eb-6Vg" id="DrI-f5-Skq">
@@ -473,7 +473,7 @@
                                                         <connections>
                                                             <outlet property="date" destination="Udb-fc-6ro" id="wzk-fI-vYI"/>
                                                             <outlet property="humid" destination="nb3-tA-C9A" id="ysM-FG-drl"/>
-                                                            <outlet property="tempertuare" destination="XSf-Fi-yq6" id="uad-4B-hax"/>
+                                                            <outlet property="temperatuare" destination="XSf-Fi-yq6" id="C0V-YP-ijz"/>
                                                             <outlet property="weatherIcon" destination="8dj-xZ-d5T" id="KJi-M2-Mfe"/>
                                                             <outlet property="week" destination="wz3-2d-otW" id="Mi1-NJ-rIJ"/>
                                                         </connections>

@@ -10,11 +10,11 @@ import UIKit
 
 class WeekWeatherTableViewCell: UITableViewCell {
 
-    static let reuseIdentifi = "WeekWeatherCell"
+    static let reuseIdentifier = "WeekWeatherCell"
     
     @IBOutlet weak var week: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var tempertuare: UILabel!
+    @IBOutlet weak var temperatuare: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var humid: UILabel!
     

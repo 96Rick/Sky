@@ -9,9 +9,9 @@
 import Foundation
 
 struct ForecastData: Codable {
-    let date: Date
+    let time: Date
     let temperatureLow: Double
-    let temperatureHeigh: Double
+    let temperatureHigh: Double
     let icon: String
     let humidity: Double 
 }
