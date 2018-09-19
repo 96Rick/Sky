@@ -26,9 +26,16 @@ final class WeatherDataManager {
     typealias CompletionHandler = (WeatherData?, DataManagerError?) -> Void
     
     func weatherDataAt(latitude: Double, longitude: Double, completion: @escaping CompletionHandler) {
-        let url = baseURL.appendingPathComponent("\(latitude),\(longitude)")
-        var request = URLRequest(url: url)
         
+        //判断本机是否为中文，如果为中文则添在url中添加参数 ?lang=zh 以获取中文天气
+        let transformationBeforeURL = baseURL.appendingPathComponent("\(latitude),\(longitude)/")
+        let appendStr = UserDefaults.getCurrentLanguage() == "CN" ? "?lang=zh" : ""
+
+        var urlStr = transformationBeforeURL.absoluteString
+        urlStr += appendStr
+        let transformationAfterURL = URL(string: urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        
+        var request = URLRequest(url: transformationAfterURL!)
         request.setValue("application/json", forHTTPHeaderField: "Content-type")
         request.httpMethod = "GET"
         
@@ -44,13 +51,18 @@ final class WeatherDataManager {
         } else if let data = data, let response = response as? HTTPURLResponse  {
             if response.statusCode == 200 {
                 do {
-                    let weatherData =  try JSONDecoder().decode(WeatherData.self, from: data )
+                    let weatherData = try JSONDecoder().decode(WeatherData.self, from: data)
+//                    print(weatherData)
+//                    print("1")
                     completion(weatherData, nil)
                 }
                 catch {
-                    completion(nil, .invalidResponse )
+                    print(response)
+                    print("inv")
+                    completion(nil, .invalidResponse)
                 }
             } else {
+                print("1")
                 completion(nil, .failedRequest)
             }
         }

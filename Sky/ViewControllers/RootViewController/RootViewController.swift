@@ -12,7 +12,9 @@ import CoreLocation
 class RootViewController: UIViewController {
     
     var currentWeatherViewController: CurrentWeatherViewController!
+    var weekWeatherViewController: WeekWeatherViewController!
     private let segueCurrentWeather = "segueCurrentWeather"
+    private let segueWeekWeather = "segueWeekWeather"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
@@ -24,13 +26,19 @@ class RootViewController: UIViewController {
             }
     
             destination.delegate = self
+            destination.viewModel = CurrentWeatherViewModel()
             currentWeatherViewController = destination
+        case segueWeekWeather:
+            guard let destination = segue.destination as? WeekWeatherViewController else {
+                fatalError("segue failed")
+            }
+            
+            weekWeatherViewController = destination
         
         default:
             break
         }
     }
-    
     
     private var currentLocation: CLLocation? {
         didSet {
@@ -56,28 +64,17 @@ class RootViewController: UIViewController {
                 dump(error)
             } else if let response = response {
                 // Notify CurrentWeatherController
-                self.currentWeatherViewController.now = response
+                self.currentWeatherViewController.viewModel?.weather = response
+//                print(response)
+                
+                // FIXME: a problem
+                self.weekWeatherViewController.viewModel = WeekWeatherViewModel(weatherData: response.daily.data)
             }
         })
     }
     
     private func fetchCity() {
         guard let currentLocation = currentLocation else { return }
-        CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: {
-            placemarks, error in
-            if let error = error {
-                print(error)
-            } else if let city = placemarks?.first?.locality {
-                let l = Location(
-                    name: city,
-                    latitude: currentLocation.coordinate.latitude,
-                    longitude: currentLocation.coordinate.longitude)
-                
-                self.currentWeatherViewController.location = l
-            }
-        })
-        
-        
         CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: {
             placemarks, error in
             
@@ -90,9 +87,7 @@ class RootViewController: UIViewController {
                     name: city,
                     latitude: currentLocation.coordinate.latitude,
                     longitude: currentLocation.coordinate.longitude)
-                
-                self.currentWeatherViewController.location = l
-                
+                self.currentWeatherViewController.viewModel?.location = l
             }
         })
     }
@@ -157,7 +152,6 @@ extension RootViewController: CLLocationManagerDelegate {
         dump(error)
     }
 }
-
 
 extension RootViewController: CurrentWeatherViewControllerDelegate {
     func locationButtonPressed(controller: WeatherViewController) {
